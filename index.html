@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ramificación 4D</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .dos { display: grid; gap: 16px; grid-template-columns: 3fr 2fr; }
+    @media (max-width: 1150px) { .dos { grid-template-columns: 1fr; } }
+    .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .seg button { border: 0; border-radius: 0; }
+    .seg button.activo { background: var(--accent); color: var(--accent-text); }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <h1>Ramificación de la cuarta dimensión</h1>
+    <p>La vida entera de algo vista como un solo objeto, con el tiempo como una dimensión más. Si ese algo se divide, su forma completa no es un bloque: es un árbol. Acá, con una dimensión menos para poder dibujarlo: un plano más el tiempo.</p>
+  </header>
+
+  <main>
+    <div class="layout">
+      <section class="card" aria-labelledby="t-c">
+        <h2 id="t-c">Controles</h2>
+        <label for="modo">¿Qué es la dimensión extra?</label>
+        <select id="modo">
+          <option value="tiempo">El tiempo: algo que se divide de verdad</option>
+          <option value="posibilidades">Las posibilidades: futuros alternativos</option>
+        </select>
+        <label for="t">Instante del corte <span class="val" id="v-t"></span></label>
+        <input type="range" id="t" min="0" max="59" step="1" value="45">
+        <label for="p">Probabilidad de dividirse por paso <span class="val" id="v-p"></span></label>
+        <input type="range" id="p" min="0" max="0.15" step="0.005" value="0.06">
+        <label for="giro">Giro de la vista <span class="val" id="v-giro"></span></label>
+        <input type="range" id="giro" min="0" max="360" step="1" value="35">
+        <div class="row" style="margin-top:14px">
+          <button id="otro" class="primary">Otro árbol</button>
+        </div>
+        <div class="stats" style="margin-top:14px" aria-live="polite">
+          <div class="stat"><div class="k">En este instante</div><div class="v" id="s-corte">—</div></div>
+          <div class="stat"><div class="k">Ramas al final</div><div class="v" id="s-hojas">—</div></div>
+        </div>
+        <p class="small muted" id="txt-modo"></p>
+      </section>
+
+      <div class="dos">
+        <section class="card">
+          <h2>La historia completa</h2>
+          <canvas id="c-arbol" aria-label="El árbol completo en tres dimensiones: plano más tiempo, con el plano del corte"></canvas>
+          <p class="small muted">Eje vertical: el tiempo. El plano marca el instante del corte.</p>
+        </section>
+        <section class="card">
+          <div class="row" style="justify-content:space-between">
+            <h2 style="margin:0">Lo que se ve en el plano</h2>
+            <div class="seg" role="group" aria-label="Corte o proyección">
+              <button id="v-corte" class="activo">Corte</button>
+              <button id="v-proy">Proyección</button>
+            </div>
+          </div>
+          <canvas id="c-plano" aria-label="Lo que se ve en el plano: el corte o la sombra de toda la historia"></canvas>
+          <p class="small muted" id="txt-vista"></p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>Un objeto que no se ramifica (probabilidad 0) se ve como un tubo, no como un árbol: el árbol aparece solo cuando el objeto en sí se divide o tiene alternativas.</footer>
+
+  <script src="src/grafico.js"></script>
+  <script src="src/arbol.js"></script>
+  <script src="src/app.js"></script>
+</body>
+</html>

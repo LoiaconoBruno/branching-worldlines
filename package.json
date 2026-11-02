@@ -1,0 +1,10 @@
+{
+  "name": "ramificacion-cuarta-dimension",
+  "version": "0.1.0",
+  "description": "El tubo de mundo de algo que se ramifica: corte, proyección e historias posibles",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test"
+  }
+}

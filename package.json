@@ -1,10 +1,16 @@
 {
-  "name": "ramificacion-cuarta-dimension",
+  "name": "branching-worldlines",
   "version": "0.1.0",
-  "description": "El tubo de mundo de algo que se ramifica: corte, proyección e historias posibles",
+  "description": "El tubo de mundo de algo que se ramifica: corte, proyección e historias posibles.",
   "private": true,
   "license": "MIT",
   "scripts": {
     "test": "node --test"
-  }
+  },
+  "homepage": "https://loiaconobruno.github.io/branching-worldlines/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoiaconoBruno/branching-worldlines.git"
+  },
+  "author": "Bruno Loiacono"
 }

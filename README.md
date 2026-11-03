@@ -4,7 +4,7 @@
 
 **Ramificación de la cuarta dimensión.** La vida entera de algo que se divide, vista como un solo objeto: no es un bloque, es un árbol.
 
-[**▶ Probala en vivo**](https://loiaconobruno.github.io/branching-worldlines/) · [Cómo funciona](#cómo-funciona) · [Limitaciones](#limitaciones)
+[**▶ Probala en vivo**](https://loiaconobruno.github.io/branching-worldlines/) · [**📄 Paper y guía**](https://loiaconobruno.github.io/branching-worldlines/guia.html) · [Cómo funciona](#cómo-funciona) · [Limitaciones](#limitaciones)
 
 [![Tests](https://github.com/LoiaconoBruno/branching-worldlines/actions/workflows/tests.yml/badge.svg)](https://github.com/LoiaconoBruno/branching-worldlines/actions/workflows/tests.yml)
 ![Dependencias: 0](https://img.shields.io/badge/dependencias-0-brightgreen)
@@ -82,6 +82,10 @@ npm test
 - Versión con espacio 3D + tiempo: mostrar los cortes 3D de un árbol 4D con three.js.
 - Agregar la tercera lectura: un objeto 4D espacial que atraviesa nuestro espacio.
 - Escribir el concepto en una página, eligiendo cuál de las tres dimensiones es la de la idea.
+
+## Paper de uso y guía
+
+[`guia.html`](https://loiaconobruno.github.io/branching-worldlines/guia.html) (fuente en [`docs/guia.md`](docs/guia.md)) tiene un paper de uso paso a paso y una guía de unas 20 páginas sobre la idea de fondo, con citas a los especialistas del tema.
 
 ## Licencia
 

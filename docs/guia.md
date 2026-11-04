@@ -305,7 +305,37 @@ El próximo paso del proyecto es llevar la visualización a la idea original: un
 
 **Lo que no cambia.** Las propiedades que la herramienta ilustra no dependen de la dimensión: el corte sigue mostrando piezas separadas que comparten un pasado, la proyección sigue perdiendo el orden temporal, un objeto que no se divide sigue siendo un tubo, y la diferencia entre el modo tiempo y el modo posibilidades sigue siendo de interpretación, no de forma. Por eso la versión plana es un buen modelo de la idea: es la idea con una dimensión menos, no una idea distinta.
 
-### 18. Del modelo al código
+### 18. Leer el árbol escrito en las células
+
+La sección 11 contó que Sulston reconstruyó el linaje celular de *C. elegans* mirando embriones al microscopio. Para animales más grandes, con millones o billones de células, eso es imposible. En la última década apareció otra manera: hacer que cada célula **escriba** su propia historia en el ADN, y leerla después.
+
+#### 18.1 Códigos de barras que se acumulan
+
+En 2016, Aaron McKenna, Gregory Findlay, James Gagnon, Jay Shendure y colaboradores publicaron en *Science* (353(6298), aaf7907) un método al que llamaron GESTALT. Introdujeron en el genoma de embriones de pez cebra un fragmento de ADN artificial, un "código de barras", y usaron la herramienta de edición genética CRISPR-Cas9 para que, durante el desarrollo, se fueran produciendo al azar pequeñas mutaciones en ese fragmento. Cada célula hereda las mutaciones de su madre y acumula algunas nuevas. Al final, secuenciando los códigos de barras de miles de células del pez adulto, se puede reconstruir el árbol: las células que comparten más mutaciones descienden de un ancestro común más reciente.
+
+Es el problema del coalescente de la sección 12.4 resuelto con datos: a partir del corte final (las células del adulto) se infiere la forma del árbol que lo produjo. Y tiene las mismas dificultades que la filogenética de las especies: las mutaciones pueden repetirse por azar en ramas distintas, algunas borran a otras, y con pocas mutaciones el árbol queda poco resuelto.
+
+#### 18.2 Árbol y destino
+
+Lo que hace poderosos a estos métodos es que se pueden combinar con la secuenciación del ARN de cada célula, que dice **qué tipo** de célula es (una neurona, una célula de la piel, una del corazón). Así se obtiene, a la vez, el árbol de linajes y la identidad final de cada hoja. Eso permite preguntar, por ejemplo, si dos células del mismo tipo vienen de una rama común o de ramas distintas que convergieron en el mismo destino.
+
+La respuesta, en muchos tejidos, es la segunda: tipos celulares idénticos aparecen en ramas muy distintas del árbol. El destino de una célula no está escrito solo en su linaje sino también en las señales que recibe de su entorno. Para la idea, es una lección importante: en el árbol real, dos hojas parecidas no son necesariamente parientes cercanos. La forma del árbol (quién viene de quién) y la apariencia del corte (qué tipo de cosa hay en cada lugar) son informaciones distintas, como lo eran el corte y la proyección de la herramienta.
+
+#### 18.3 Lo que esto agrega a la herramienta
+
+La herramienta genera árboles al azar y los muestra enteros. Una extensión natural, inspirada en estos métodos, sería un modo "detective": mostrar solo el corte final, con cada pieza marcada por un código de barras de mutaciones heredadas, y pedirle al usuario que reconstruya el árbol. Permitiría experimentar con la dificultad real del problema: cuántas mutaciones hacen falta por división para reconstruir bien el árbol, qué pasa si algunas se repiten, cuánto se equivoca la reconstrucción en las ramas más antiguas. Es el mismo ejercicio que hacen los biólogos con GESTALT y los lingüistas con los árboles de lenguas: ver el presente y deducir la historia.
+
+### 19. Árboles que se dibujan para entender
+
+Cómo se dibuja un árbol cambia lo que se entiende de él. La herramienta usa una perspectiva tridimensional, con el tiempo hacia arriba, que tiene la ventaja de mostrar a la vez el espacio y el tiempo. Los biólogos y lingüistas usan sobre todo otras formas:
+
+- **El dendrograma**, con el tiempo en un eje y las ramas separadas en el otro sin significado espacial. Es la forma del diagrama de Darwin y de casi todos los árboles filogenéticos. Muestra con claridad el orden de las divisiones, pero pierde la posición.
+- **El árbol radial**, con la raíz en el centro y las hojas en un círculo. Es útil cuando hay muchas hojas, como en los árboles de la vida con miles de especies.
+- **El cladograma**, que muestra solo el orden de las ramificaciones, sin tiempos. Dice quién es pariente de quién, no cuándo se separaron.
+
+Cada forma responde a una pregunta distinta. La perspectiva de la herramienta responde a la de la idea original: cómo se ve, como objeto, la historia completa de algo que se divide. Un dendrograma respondería a otra: en qué orden se dividió. Agregar una vista de dendrograma al lado de la perspectiva permitiría ver las dos cosas, y mostraría que el mismo árbol puede parecer muy distinto según se lo proyecte, que es, otra vez, la lección de la sombra.
+
+### 20. Del modelo al código
 
 | Concepto | Función en `src/arbol.js` | Qué produce en la página |
 |---|---|---|
@@ -329,7 +359,7 @@ A.hojas(arbol).length;                  // 15
 A.generar({ probDivision: 0 }).celulas.length;   // 1 (un tubo)
 ```
 
-### 19. Ejercicios
+### 21. Ejercicios
 
 1. Con p = 0,06, calculá el número esperado de piezas en el instante 30. Después generá varios árboles con "Otro árbol" y anotá cuántas piezas hay en el corte 30. ¿Cuánto se dispersan?
 2. ¿Qué probabilidad de división hace que el número esperado de ramas al final sea 48? (Resolvé (1 + p)^59 = 48.)
@@ -339,7 +369,7 @@ A.generar({ probDivision: 0 }).celulas.length;   // 1 (un tubo)
 6. Con una foto de exposición larga (o una app que la simule), fotografiá a alguien caminando. Explicá por qué la imagen es una proyección y no un corte.
 7. Escribí, en una página, cuál de las tres "cuartas dimensiones" es la de la idea original y por qué. Es el tercer próximo paso del proyecto.
 
-### 20. Glosario
+### 22. Glosario
 
 - **Línea de mundo:** la trayectoria de una partícula en el espacio-tiempo.
 - **Tubo de mundo:** la región del espacio-tiempo ocupada por un objeto extendido a lo largo de su existencia.
@@ -353,7 +383,7 @@ A.generar({ probDivision: 0 }).celulas.length;   // 1 (un tubo)
 - **Tiempo ramificado:** modelo lógico en el que el pasado es único y el futuro tiene muchas ramas posibles.
 - **Muchos mundos:** interpretación de la mecánica cuántica en la que todas las ramas de una medición existen.
 
-### 21. Conclusión
+### 23. Conclusión
 
 La idea de que la historia completa de algo que se divide tiene forma de árbol es correcta, y la herramienta la muestra con un ejemplo que se puede girar, cortar y proyectar. Pero la idea gana precisión al separar sus tres lecturas. Si la dimensión extra es el **tiempo**, el árbol es un objeto real del espacio-tiempo de Minkowski, como el linaje celular de *C. elegans* que Sulston reconstruyó célula por célula, y cada instante es un corte en el que piezas que parecen independientes comparten un pasado. Si la dimensión extra es el conjunto de las **posibilidades**, el árbol es el jardín de Borges y el tiempo ramificado de Prior, y en él se vive una sola rama; si además todas las ramas existen, es el multiverso de Everett. Si es una dimensión **espacial**, el árbol sería un objeto de cuatro dimensiones que atraviesa nuestro espacio, la lectura que la herramienta deja para después.
 
@@ -380,6 +410,7 @@ La herramienta agrega dos correcciones a la idea: un objeto que no se ramifica n
 - Leibniz, G. W. (1710). *Essais de Théodicée sur la bonté de Dieu, la liberté de l'homme et l'origine du mal*. Ámsterdam: Isaac Troyel.
 - Lewis, D. (1986). *On the Plurality of Worlds*. Blackwell. ISBN 978-0-631-13994-6.
 - Marey, É.-J. (1894). *Le mouvement*. París: G. Masson.
+- McKenna, A., Findlay, G. M., Gagnon, J. A., Horwitz, M. S., Schier, A. F., & Shendure, J. (2016). Whole-organism lineage tracing by combinatorial and cumulative genome editing. *Science*, 353(6298), aaf7907. https://doi.org/10.1126/science.aaf7907
 - McTaggart, J. M. E. (1908). The unreality of time. *Mind*, 17(68), 457–474. https://doi.org/10.1093/mind/XVII.4.457
 - Minkowski, H. (1909). Raum und Zeit. *Physikalische Zeitschrift*, 10, 104–111.
 - von Neumann, J., & Morgenstern, O. (1944). *Theory of Games and Economic Behavior*. Princeton University Press.

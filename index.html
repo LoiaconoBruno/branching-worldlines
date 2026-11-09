@@ -1,75 +1,171 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ramificación 4D</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    .dos { display: grid; gap: 16px; grid-template-columns: 3fr 2fr; }
-    @media (max-width: 1150px) { .dos { grid-template-columns: 1fr; } }
-    .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .seg button { border: 0; border-radius: 0; }
-    .seg button.activo { background: var(--accent); color: var(--accent-text); }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Líneas de mundo que se ramifican: cortes, proyecciones y tres lecturas de una cuarta dimensión</title>
+<meta name="description" content="Preprint de Bruno Loiacono (estudiante de Física, UBA): Líneas de mundo que se ramifican: cortes, proyecciones y tres lecturas de una cuarta dimensión.">
+<style>
+:root{--bg:#f7f6f2;--surface:#fff;--text:#1d1c1a;--muted:#5b574f;--border:#d9d5cb;--accent:#2a55c9;--accent-text:#fff;--aviso:#fdf3e1;--aviso-borde:#c27a12;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#141416;--surface:#1d1d21;--text:#ecebe7;--muted:#a8a59f;--border:#36363c;--accent:#8fb0ff;--accent-text:#0d0d10;--aviso:#2a2216;--aviso-borde:#e0a54a;color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:18px/1.65 Georgia,"Iowan Old Style","Times New Roman",serif}
+.wrap{max-width:780px;margin:0 auto;padding:20px 16px 80px}
+.sans{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.aviso{font:600 14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--aviso);border:1px solid var(--aviso-borde);border-radius:8px;padding:8px 12px;margin:0 0 18px}
+h1{font-size:2rem;line-height:1.2;margin:8px 0 6px}
+.en{color:var(--muted);font-style:italic;margin:0 0 10px}
+.autor{font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--muted);margin:0 0 16px}
+.acciones{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px;font:15px system-ui,-apple-system,"Segoe UI",sans-serif}
+.boton{display:inline-flex;align-items:center;gap:6px;padding:9px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);text-decoration:none}
+.boton.primario{background:var(--accent);border-color:var(--accent);color:var(--accent-text);font-weight:600}
+.boton:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
+nav.toc{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;margin:0 0 8px}
+nav.toc ul{margin:6px 0 0;padding:0;list-style:none}
+nav.toc li{margin:2px 0}
+h2{font-size:1.4rem;line-height:1.3;margin:44px 0 10px;padding-top:12px;border-top:1px solid var(--border)}
+h3{font-size:1.12rem;margin:28px 0 8px}
+h4{font-size:1rem;margin:22px 0 6px}
+.resumen{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:4px 18px 8px;margin:16px 0}
+.resumen h2{border:0;margin:12px 0 4px;padding:0;font-size:1.05rem}
+.clave{font-size:.95rem;color:var(--muted)}
+figure{margin:26px 0;padding:0}
+figure img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--border);border-radius:8px}
+figcaption{font-size:.92rem;color:var(--muted);margin-top:8px;line-height:1.5}
+.desliza{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+thead th{border-bottom:2px solid var(--text)}
+.ecuacion{overflow-x:auto;overflow-y:hidden;margin:14px 0}
+mjx-container[display="true"]{overflow-x:auto;overflow-y:hidden}
+blockquote{margin:16px 0;padding:2px 16px;border-left:3px solid var(--border);color:var(--muted)}
+code{font:.9em ui-monospace,"SF Mono",Menlo,monospace;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:0 4px}
+ol.refs{padding-left:20px;font-size:.95rem}
+ol.refs li{margin-bottom:8px;overflow-wrap:anywhere}
+footer{margin-top:48px;padding-top:14px;border-top:1px solid var(--border);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--muted)}
+pre{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font:13px/1.5 ui-monospace,"SF Mono",Menlo,monospace}
+@media (max-width:600px){body{font-size:17px}h1{font-size:1.6rem}}
+@media print{.acciones,nav.toc{display:none}}
+</style>
+<script>
+window.MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["\\[","\\]"]],tags:"ams",processEnvironments:true,processRefs:true,macros:{}},chtml:{scale:1},options:{skipHtmlTags:["script","noscript","style","textarea","pre","code"]}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script>
 </head>
 <body>
-  <header class="top">
-    <h1>Ramificación de la cuarta dimensión</h1>
-    <p>La vida entera de algo vista como un solo objeto, con el tiempo como una dimensión más. Si ese algo se divide, su forma completa no es un bloque: es un árbol. Acá, con una dimensión menos para poder dibujarlo: un plano más el tiempo.</p>
-    <p class="guia-link"><a href="guia.html">📄 Paper de uso y guía de la idea →</a></p>
-  </header>
-
-  <main>
-    <div class="layout">
-      <section class="card" aria-labelledby="t-c">
-        <h2 id="t-c">Controles</h2>
-        <label for="modo">¿Qué es la dimensión extra?</label>
-        <select id="modo">
-          <option value="tiempo">El tiempo: algo que se divide de verdad</option>
-          <option value="posibilidades">Las posibilidades: futuros alternativos</option>
-        </select>
-        <label for="t">Instante del corte <span class="val" id="v-t"></span></label>
-        <input type="range" id="t" min="0" max="59" step="1" value="45">
-        <label for="p">Probabilidad de dividirse por paso <span class="val" id="v-p"></span></label>
-        <input type="range" id="p" min="0" max="0.15" step="0.005" value="0.06">
-        <label for="giro">Giro de la vista <span class="val" id="v-giro"></span></label>
-        <input type="range" id="giro" min="0" max="360" step="1" value="35">
-        <div class="row" style="margin-top:14px">
-          <button id="otro" class="primary">Otro árbol</button>
-        </div>
-        <div class="stats" style="margin-top:14px" aria-live="polite">
-          <div class="stat"><div class="k">En este instante</div><div class="v" id="s-corte">—</div></div>
-          <div class="stat"><div class="k">Ramas al final</div><div class="v" id="s-hojas">—</div></div>
-        </div>
-        <p class="small muted" id="txt-modo"></p>
-      </section>
-
-      <div class="dos">
-        <section class="card">
-          <h2>La historia completa</h2>
-          <canvas id="c-arbol" aria-label="El árbol completo en tres dimensiones: plano más tiempo, con el plano del corte"></canvas>
-          <p class="small muted">Eje vertical: el tiempo. El plano marca el instante del corte.</p>
-        </section>
-        <section class="card">
-          <div class="row" style="justify-content:space-between">
-            <h2 style="margin:0">Lo que se ve en el plano</h2>
-            <div class="seg" role="group" aria-label="Corte o proyección">
-              <button id="v-corte" class="activo">Corte</button>
-              <button id="v-proy">Proyección</button>
-            </div>
-          </div>
-          <canvas id="c-plano" aria-label="Lo que se ve en el plano: el corte o la sombra de toda la historia"></canvas>
-          <p class="small muted" id="txt-vista"></p>
-        </section>
-      </div>
-    </div>
-  </main>
-
-  <footer>Un objeto que no se ramifica (probabilidad 0) se ve como un tubo, no como un árbol: el árbol aparece solo cuando el objeto en sí se divide o tiene alternativas.</footer>
-
-  <script src="src/grafico.js"></script>
-  <script src="src/arbol.js"></script>
-  <script src="src/app.js"></script>
+<main class="wrap">
+<p class="aviso">Preprint · documento de trabajo sin revisión por pares</p>
+<h1>Líneas de mundo que se ramifican: cortes, proyecciones y tres lecturas de una cuarta dimensión</h1>
+<p class="en" lang="en">Branching worldlines: slices, projections and three readings of a fourth dimension</p>
+<p class="autor">Bruno Loiacono · Estudiante de Física, Universidad de Buenos Aires · Noviembre de 2026</p>
+<div class="acciones">
+<a class="boton primario" href="paper/paper.pdf" download>Descargar PDF</a>
+<a class="boton" href="https://github.com/LoiaconoBruno/branching-worldlines">Repositorio</a>
+<a class="boton" href="https://github.com/LoiaconoBruno/branching-worldlines#cómo-citarlo">Cómo citarlo</a>
+</div>
+<nav class="toc" aria-label="Índice"><strong>Índice</strong><ul><li><a href="#sec:intro">1. Introducción</a></li><li><a href="#sec:antecedentes">2. Antecedentes</a></li><li><a href="#sec:modelo">3. Modelo</a></li><li><a href="#sec:resultados">4. Resultados</a></li><li><a href="#sec:discusion">5. Discusión y limitaciones</a></li><li><a href="#sec:conclusiones">6. Conclusiones y trabajo futuro</a></li><li><a href="#declaración-de-uso-de-ia">Declaración de uso de IA</a></li><li><a href="#referencias">Referencias</a></li></ul></nav>
+<p></p>
+<section class="resumen"><h2 id="resumen">Resumen</h2><p>Si se mira la vida entera de algo como un solo objeto, con el tiempo como una dimensión más, y ese algo se divide, su forma completa es un árbol, y lo que vemos en cada instante es un corte. Este trabajo precisa esa idea. Primero separa tres lecturas de la «cuarta dimensión»: el tiempo del espacio-tiempo de Minkowski, el conjunto de futuros posibles y una dimensión espacial extra. Después agrega dos correcciones: un objeto que no se divide es un tubo, no un árbol, y un corte no es una proyección. Un modelo de objetos en un plano que se dividen con probabilidad $p$ por paso permite mostrar las tres cosas con números. En el árbol de ejemplo, ocho piezas que parecen independientes en un instante comparten un único antepasado. El número de piezas sigue un proceso de Galton–Watson cuya media $(1+p)^t$ y cuya varianza se derivan en forma cerrada y coinciden con 5000 simulaciones. La dispersión es enorme: con $p = 0{,}06$, a los 59 pasos el 10 % de los árboles tiene 4 piezas o menos y otro 10 %, 70 o más. Se discuten los linajes celulares, el tiempo ramificado de la lógica y la interpretación de muchos mundos.</p></section>
+<section class="resumen" lang="en"><h2 id="abstract">Abstract</h2><p>If the whole life of something is seen as a single object, with time as one more dimension, and that something divides, its complete shape is a tree, and what we see at each instant is a slice. This paper makes the idea precise. It first separates three readings of the “fourth dimension”: the time of Minkowski spacetime, the set of possible futures, and an extra spatial dimension. It then adds two corrections: an object that does not divide is a tube, not a tree, and a slice is not a projection. A model of objects in a plane that divide with probability $p$ per step shows all three points with numbers. In the example tree, eight pieces that look independent at one instant share a single ancestor. The number of pieces follows a Galton–Watson process whose mean $(1+p)^t$ and variance are derived in closed form and agree with 5000 simulations. The spread is huge: with $p = 0.06$, after 59 steps 10% of the trees have 4 pieces or fewer and another 10% have 70 or more. Cell lineages, branching-time logic and the many-worlds interpretation are discussed.</p></section>
+<p class="clave"><strong>Palabras clave:</strong> línea de mundo; universo bloque; proceso de Galton–Watson; linaje celular; tiempo ramificado; muchos mundos.</p>
+<p class="clave" lang="en"><strong>Keywords:</strong> worldline; block universe; Galton–Watson process; cell lineage; branching time; many worlds.</p>
+<h2 id="sec:intro">1. Introducción</h2>
+<p>La idea que motiva este trabajo se formulaba así: si se mira algo a lo largo de toda su existencia como un solo objeto, y ese algo se ramifica, entonces su forma en «la cuarta dimensión» es un árbol. La frase es sugerente, pero «cuarta dimensión» puede querer decir tres cosas muy distintas:</p>
+<ol><li><strong>El tiempo.</strong> En la relatividad, el tiempo forma con el espacio un continuo de cuatro dimensiones, y la historia entera de un objeto es una figura en ese continuo.</li><li><strong>Las posibilidades.</strong> El conjunto de los futuros alternativos. No es una dimensión del espacio ni del tiempo, sino del espacio de lo que podría pasar.</li><li><strong>Una cuarta dimensión espacial.</strong> Una dirección más del espacio, perpendicular a las tres conocidas.</li></ol>
+<p>Con la primera lectura, el árbol es un objeto real; con la segunda, un mapa de alternativas del que se vive un solo camino; con la tercera, un objeto quieto en cuatro dimensiones cuyos cortes veríamos pasar. Además, la idea necesita dos correcciones. Un objeto que no se ramifica no tiene forma de árbol sino de tubo. Y lo que vemos en un instante es un <em>corte</em> de la historia, no su <em>proyección</em>: el corte muestra piezas separadas sin pasado; la proyección, todo el pasado sin orden.</p>
+<p>La sección <a href="#sec:antecedentes">2</a> recorre lo que dijeron sobre cada lectura la física, la biología, la lógica y la filosofía. La sección <a href="#sec:modelo">3</a> define un modelo de objetos que se dividen en un plano, con el tiempo como tercera dimensión, y deriva la estadística del número de piezas. La sección <a href="#sec:resultados">4</a> aplica el modelo a un árbol de ejemplo y a 5000 árboles simulados. La sección <a href="#sec:discusion">5</a> discute qué cambia entre las lecturas y qué deja afuera el modelo.</p>
+<h2 id="sec:antecedentes">2. Antecedentes</h2>
+<h3 id="el-tiempo-como-dimensión">2.1. El tiempo como dimensión</h3>
+<p>En su conferencia <em>Raum und Zeit</em>, Minkowski (<a href="#ref-minkowski1909">1909</a>) le dio a la relatividad especial su forma geométrica, el espacio-tiempo, e introdujo la <em>línea de mundo</em>: la trayectoria de una partícula en el espacio-tiempo, el conjunto de todos los eventos de su existencia. Un objeto extendido no tiene una línea sino un <em>tubo de mundo</em>. Si las historias son figuras en el espacio-tiempo, surge la imagen del <em>universo bloque</em>: todo lo que pasó, pasa y pasará está en el bloque, y el presente es solo el corte en el que nos encontramos. Weyl (<a href="#ref-weyl1949">1949</a>) lo expresó diciendo que el mundo objetivo simplemente <em>es</em>, no <em>sucede</em>, y que solo para la conciencia que recorre su línea de mundo aparece una sección del mundo como imagen fugaz.</p>
+<p>La relatividad agrega un argumento. Observadores en movimiento relativo no coinciden en qué eventos son simultáneos: cortan el espacio-tiempo con planos de simultaneidad distintos. Rietdijk (<a href="#ref-rietdijk1966">1966</a>) y Putnam (<a href="#ref-putnam1967">1967</a>) argumentaron que, si cada observador tiene el mismo derecho a considerar real su presente, el futuro tiene que ser tan real como el presente. También pone un límite a la forma de las ramas: ninguna línea de mundo puede salir del cono de luz de sus eventos, una estructura causal que desarrollan Hawking y Ellis (<a href="#ref-hawking1973">1973</a>).</p>
+<h3 id="persistencia-e-identidad">2.2. Persistencia e identidad</h3>
+<p>McTaggart (<a href="#ref-mctaggart1908">1908</a>) distinguió dos maneras de ordenar los eventos: la serie A, como pasados, presentes y futuros, propiedades que cambian; y la serie B, como anteriores o posteriores, relaciones que no cambian. El universo bloque es un mundo de pura serie B. Mirar la vida entera de algo como un solo objeto es, en metafísica, el <em>perdurantismo</em>: un objeto que existe a lo largo del tiempo está formado por partes temporales, como un gusano en el espacio-tiempo (Lewis <a href="#ref-lewis1986">1986</a>; Sider <a href="#ref-sider2001">2001</a>). Su rival, el <em>endurantismo</em>, sostiene que el objeto está entero en cada instante. Parfit (<a href="#ref-parfit1984">1984</a>) discutió personas que se «dividen» y concluyó que la identidad no es lo que importa, sino la continuidad psicológica, que sí puede ramificarse. Para el perdurantista, si una ameba se divide, el objeto es el árbol entero, y la pregunta «¿cuál de las hijas es la madre?» se reemplaza por «¿qué partes del árbol comparten estas dos ramas?».</p>
+<h3 id="linajes">2.3. Linajes</h3>
+<p>El modo «tiempo» de la idea tiene un modelo físico concreto: un linaje celular. Sulston et al. (<a href="#ref-sulston1983">1983</a>) reconstruyeron el linaje embrionario completo del nematodo <em>Caenorhabditis elegans</em>, observando embriones vivos al microscopio: un árbol de 671 células, de las cuales 113 mueren por muerte celular programada. A otra escala, la única figura de Darwin (<a href="#ref-darwin1859">1859</a>) es un diagrama de ramas que se dividen a lo largo del tiempo. El árbol de la vida no es estrictamente un árbol: la transferencia horizontal de genes hace que algunas ramas se vuelvan a juntar, y Doolittle (<a href="#ref-doolittle1999">1999</a>) propuso que en la base la historia de la vida se parece más a una red. Algunos procesos dejan su historia ramificada escrita en el espacio, como si la naturaleza hiciera la proyección: Witten y Sander (<a href="#ref-witten1981">1981</a>) mostraron que partículas que se mueven al azar y se pegan a un agregado producen estructuras ramificadas como las de un rayo o un coral.</p>
+<h3 id="procesos-de-ramificación">2.4. Procesos de ramificación</h3>
+<p>Watson y Galton (<a href="#ref-watson1875">1875</a>) resolvieron el problema de Galton sobre la extinción de los apellidos y fundaron la teoría de los procesos de ramificación: si el número medio de hijos por individuo es $m$, el linaje se extingue con probabilidad 1 si $m \le 1$ y sobrevive con probabilidad positiva si $m &gt; 1$. Harris (<a href="#ref-harris1963">1963</a>) sistematizó la teoría. Yule (<a href="#ref-yule1925">1925</a>) introdujo el proceso en que cada individuo se divide a un ritmo constante, para explicar por qué algunos géneros biológicos tienen muchas especies y otros pocas. Kingman (<a href="#ref-kingman1982">1982</a>) formalizó la mirada inversa, el <em>coalescente</em>: cómo se juntan hacia el pasado los linajes de una muestra, que es la herramienta básica para inferir un árbol a partir del corte presente.</p>
+<h3 id="tiempo-ramificado-y-posibilidades">2.5. Tiempo ramificado y posibilidades</h3>
+<p>En «El jardín de senderos que se bifurcan», incluido en <em>Ficciones</em> (Borges <a href="#ref-borges1944">1944</a>), un personaje descubre que su antepasado escribió una novela en la que, ante cada alternativa, se eligen todas, y los porvenires proliferan y se bifurcan. En lógica, Prior (<a href="#ref-prior1967">1967</a>) discutió modelos en que el tiempo es lineal hacia el pasado y se ramifica hacia el futuro, y Thomason (<a href="#ref-thomason1970">1970</a>) y Belnap et al. (<a href="#ref-belnap2001">2001</a>) desarrollaron su semántica. La pregunta es antigua: Aristóteles discutió si «mañana habrá una batalla naval» es verdadera o falsa hoy. En un tiempo ramificado, la oración es verdadera en unas ramas y falsa en otras.</p>
+<h3 id="muchos-mundos">2.6. Muchos mundos</h3>
+<p>Everett (<a href="#ref-everett1957">1957</a>) propuso tomar la ecuación de Schrödinger al pie de la letra, sin colapso: al medir, el observador queda entrelazado con el sistema y el estado total contiene una rama por cada resultado. DeWitt (<a href="#ref-dewitt1970">1970</a>) la llamó interpretación de los muchos mundos. La teoría de la decoherencia (Zurek <a href="#ref-zurek2003">2003</a>) explica cómo el entorno selecciona estados robustos que definen las ramas, y Wallace (<a href="#ref-wallace2012">2012</a>) defiende esa versión. El problema más discutido es el de las probabilidades: si todas las ramas existen, qué significa que un resultado tenga probabilidad 0,3.</p>
+<h3 id="una-cuarta-dimensión-espacial">2.7. Una cuarta dimensión espacial</h3>
+<p>Abbott (<a href="#ref-abbott1884">1884</a>) y Hinton (<a href="#ref-hinton1904">1904</a>) exploraron qué vería un ser de pocas dimensiones cuando un objeto de una dimensión más atraviesa su mundo: una secuencia de cortes que aparecen, cambian de forma y desaparecen. Henderson (<a href="#ref-henderson1983">1983</a>) documentó cuánto influyó esa cuarta dimensión en el cubismo y el futurismo.</p>
+<h2 id="sec:modelo">3. Modelo</h2>
+<h3 id="objetos-que-se-dividen-en-un-plano">3.1. Objetos que se dividen en un plano</h3>
+<p>El modelo usa una dimensión menos que la idea: un plano más el tiempo. El tiempo se mide en pasos enteros $t = 0, 1, \dots, T$ y las posiciones $\mathbf r = (x, y)$ en unidades arbitrarias de longitud $L$. En $t = 0$ hay una pieza en el origen. En cada paso, cada pieza viva se divide con probabilidad $p$ (adimensional), mientras el total sea menor que un tope $N_{\max}$. Si no se divide, se desplaza al azar:</p>
+<div class="ecuacion">\begin{equation}\label{eq:paso}
+\mathbf r_i(t+1) = \mathbf r_i(t) + \delta\,\boldsymbol\xi_i(t), \qquad \boldsymbol\xi_i \sim \mathcal N(0, \mathbf I),
+\end{equation}</div>
+<p>con $\delta$ en unidades de $L$. Si se divide, desaparece y nacen dos hijas en $\mathbf r_i \pm \tfrac{s}{2}(\cos\theta, \sin\theta)$, con $\theta$ uniforme y $s$ la separación inicial, también en $L$. Los valores por defecto son $p = 0{,}06$, $T = 59$, $N_{\max} = 48$, $\delta = 0{,}012\,L$, $s = 0{,}2\,L$ y semilla 5.</p>
+<h3 id="corte-y-proyección">3.2. Corte y proyección</h3>
+<p>Si la pieza $i$ vive en los instantes $n_i \le t &lt; m_i$, el <em>corte</em> en $t$ y la <em>proyección</em> de toda la historia son</p>
+<div class="ecuacion">\begin{equation}\label{eq:corte}
+C(t) = \{\mathbf r_i(t) : n_i \le t &lt; m_i\}, \qquad \Pi = \{\mathbf r_i(s) : n_i \le s &lt; m_i,\ \forall i\}.
+\end{equation}</div>
+<p>El corte conserva qué estaba dónde a la vez y pierde el pasado; la proyección conserva por dónde pasó cada rama y pierde cuándo. Ninguno de los dos alcanza para reconstruir el árbol.</p>
+<h3 id="número-de-piezas">3.3. Número de piezas</h3>
+<p>Sin tope, cada pieza tiene en cada paso uno o dos «descendientes», con probabilidades $1-p$ y $p$. Es un proceso de Galton–Watson con media $m = 1 + p$ y varianza $\sigma^2 = p(1-p)$ por individuo. Las fórmulas estándar de esos procesos (Harris <a href="#ref-harris1963">1963</a>) dan</p>
+<div class="ecuacion">\begin{equation}\label{eq:media}
+\mathbb E[N(t)] = (1+p)^t ,
+\end{equation}</div>
+<div class="ecuacion">\begin{equation}\label{eq:varianza}
+\operatorname{Var} N(t) = \frac{\sigma^2 m^{t-1}(m^t - 1)}{m - 1} = (1-p)(1+p)^{t-1}\left[(1+p)^t - 1\right],
+\end{equation}</div>
+<p>donde la simplificación usa $\sigma^2/(m-1) = 1-p$. Las dos cantidades son números de piezas, adimensionales. El cociente $W_t = N(t)/(1+p)^t$ tiene media 1 y converge a una variable aleatoria $W$ con</p>
+<div class="ecuacion">\begin{equation}\label{eq:W}
+\operatorname{Var} W = \frac{\sigma^2}{m(m-1)} = \frac{1-p}{1+p}.
+\end{equation}</div>
+<p>Que la varianza de $W$ no tienda a cero quiere decir que el proceso nunca olvida el azar de sus primeras divisiones. Para $p \to 0$, $\operatorname{Var} W \to 1$, la varianza de una exponencial de media 1, que es el límite de tiempo continuo del proceso de Yule.</p>
+<h3 id="el-camino-vivido">3.4. El camino vivido</h3>
+<p>En la lectura de posibilidades, se vive un solo camino de la raíz a una hoja, eligiendo una hija con probabilidad $1/2$ en cada división. Una hoja a la que se llega después de $k_\ell$ divisiones tiene probabilidad</p>
+<div class="ecuacion">\begin{equation}\label{eq:camino}
+P_\ell = 2^{-k_\ell}, \qquad \sum_\ell 2^{-k_\ell} = 1 ,
+\end{equation}</div>
+<p>donde la suma vale 1 para cualquier árbol binario completo. Las hojas no son equiprobables: las ramas que se dividen más «diluyen» su probabilidad.</p>
+<h3 id="conos-de-luz">3.5. Conos de luz</h3>
+<p>Si el paso de tiempo es $\Delta t$ y la velocidad máxima es $c$, ninguna rama puede desplazarse más de $c\,\Delta t$ por paso:</p>
+<div class="ecuacion">\begin{equation}\label{eq:cono}
+|\mathbf r_i(t+1) - \mathbf r_i(t)| \le c\,\Delta t ,
+\end{equation}</div>
+<p>con los dos lados en unidades de longitud. El modelo no impone esta condición; la sección <a href="#sec:resultados">4</a> mide cuánto se aleja de ella.</p>
+<h2 id="sec:resultados">4. Resultados</h2>
+<p>Todas las cifras salen de <code>paper/figuras/generar.js</code>.</p>
+<h3 id="el-árbol-de-ejemplo">4.1. El árbol de ejemplo</h3>
+<p>Con la semilla 5, el árbol tiene 29 piezas a lo largo de su historia y 15 ramas al final. En el corte $t = 45$ hay 8 piezas (figura <a href="#fig:arbol">1</a>). Alguien que viviera en el plano vería ocho objetos independientes; en la historia completa son partes de un solo objeto, conectadas por debajo del corte.</p>
+<p>En la lectura de posibilidades, el árbol es el mismo pero cambia su significado: se vive un solo camino. Con la semilla 1 para las elecciones, el camino vivido pasa por 2 divisiones y tiene probabilidad $2^{-2} = 1/4$. Las profundidades de las hojas van de 2 a 9, así que sus probabilidades van de $1/4$ a $1/512$, y suman exactamente 1, como pide la ecuación \eqref{eq:camino}. Quien vive en la rama elegida ve una sola pieza en cada corte; las otras siete del instante 45 son lo que podría haber pasado.</p>
+<p>Con $p = 0$ queda una pieza en todos los instantes: la historia es un tubo, no un árbol.</p>
+<figure id="fig:arbol"><img src="paper/figuras/arbol.svg" alt="El árbol de ejemplo proyectado sobre el plano $(x, t)$: cada línea es la trayectoria de una pieza, con el tiempo hacia arriba. En naranja, el camino vivido en la lectura de posibilidades. La línea punteada marca el corte en $t = 45$, que atraviesa 8 ramas." loading="lazy"><figcaption><strong>Figura 1.</strong> El árbol de ejemplo proyectado sobre el plano $(x, t)$: cada línea es la trayectoria de una pieza, con el tiempo hacia arriba. En naranja, el camino vivido en la lectura de posibilidades. La línea punteada marca el corte en $t = 45$, que atraviesa 8 ramas.</figcaption></figure>
+<h3 id="crecimiento-y-dispersión">4.2. Crecimiento y dispersión</h3>
+<p>Con 5000 árboles sin tope y $p = 0{,}06$, la media de $N(59)$ es 31,4, frente a $(1{,}06)^{59} = 31{,}12$ de la ecuación \eqref{eq:media}; el desvío estándar es 29,0, frente a 28,8 de la ecuación \eqref{eq:varianza} (figura <a href="#fig:crecimiento">2</a>). La varianza de $W_{59}$ es 0,869, entre el valor exacto a $t = 59$, 0,858, y el límite \eqref{eq:W}, $(1-p)/(1+p) = 0{,}887$. La distribución de $W$ es cercana a una exponencial (figura <a href="#fig:dispersion">3</a>).</p>
+<p>La dispersión es enorme. Los percentiles 10, 50 y 90 de $N(59)$ son 4, 23 y 70 piezas: el árbol de ejemplo, con 15 ramas, no es raro, y el 36,9 % de los árboles termina con 15 piezas o menos. El 21,4 % superaría el tope de 48 que el modelo impone para que el dibujo se lea.</p>
+<figure id="fig:crecimiento"><img src="paper/figuras/crecimiento.svg" alt="Número de piezas en el corte en función del tiempo: media de 5000 árboles sin tope, predicción \eqref{eq:media}, percentiles 10 y 90, y el árbol de ejemplo, que tiene tope de 48." loading="lazy"><figcaption><strong>Figura 2.</strong> Número de piezas en el corte en función del tiempo: media de 5000 árboles sin tope, predicción \eqref{eq:media}, percentiles 10 y 90, y el árbol de ejemplo, que tiene tope de 48.</figcaption></figure>
+<figure id="fig:dispersion"><img src="paper/figuras/dispersion.svg" alt="Distribución de $W = N(59)/(1+p)^{59}$ en 5000 árboles, comparada con una exponencial de media 1. La línea vertical marca el árbol de ejemplo." loading="lazy"><figcaption><strong>Figura 3.</strong> Distribución de $W = N(59)/(1+p)^{59}$ en 5000 árboles, comparada con una exponencial de media 1. La línea vertical marca el árbol de ejemplo.</figcaption></figure>
+<h3 id="conos-de-luz">4.3. Conos de luz</h3>
+<p>En el árbol de ejemplo, el mayor desplazamiento de una rama en un paso es de $0{,}041\,L$, y el salto de una hija respecto de su madre al nacer es $s/2 = 0{,}1\,L$. Si se eligen unidades con $c\,\Delta t = 1\,L$, todas las ramas quedan muy dentro de sus conos de luz \eqref{eq:cono}: suben casi verticales. En un proceso relativista que se ramifica, como la cascada de partículas de un rayo cósmico, son los conos de luz los que dan forma al árbol.</p>
+<h2 id="sec:discusion">5. Discusión y limitaciones</h2>
+<h3 id="el-mismo-árbol-dos-significados">5.1. El mismo árbol, dos significados</h3>
+<p>El resultado conceptual más importante es que la misma figura puede ser un objeto real o un mapa de alternativas. En la lectura de tiempo, todas las ramas existen y alguien en el corte $t = 45$ ve ocho piezas. En la de posibilidades, solo una rama es real y alguien adentro ve una sola pieza; las otras siete solo son visibles para quien mira el árbol desde afuera. Esa asimetría es la que hace tan difícil poner a prueba la interpretación de muchos mundos: las otras ramas no dejan huella en la nuestra. Si además todas las ramas posibles existieran, como en el realismo modal de Lewis (<a href="#ref-lewis1986">1986</a>), la diferencia entre las dos lecturas desaparecería.</p>
+<p>La ecuación \eqref{eq:camino} muestra otra diferencia: en el modelo, la probabilidad de una rama depende solo de cuántas divisiones tiene su camino. En mecánica cuántica las ramas no tienen por qué ser equiprobables: el peso de cada una lo da la amplitud, y cómo justificarlo es justamente el problema de las probabilidades en la interpretación de Everett. El modelo no pretende modelar esto.</p>
+<h3 id="una-clasificación-de-historias">5.2. Una clasificación de historias</h3>
+<p>El tubo y el árbol no son las únicas formas posibles de una historia (tabla <a href="#tab:formas">1</a>). Un árbol es un grafo sin ciclos, y por eso dos piezas de un corte tienen un único antepasado común más reciente. En una red puede haber varios: la genealogía humana es una red, y Chang (<a href="#ref-chang1999">1999</a>) mostró que, en una población de tamaño $n$ que se mezcla al azar con dos padres por individuo, el antepasado común más reciente de todos vivió hace unas $\log_2 n$ generaciones. Feynman (<a href="#ref-feynman1949">1949</a>) describió un positrón como un electrón cuya línea de mundo va hacia atrás en el tiempo: una línea que sube, da la vuelta y baja se ve, en los cortes, como un par que se crea y, más tarde, como un par que se aniquila.</p>
+<figure class="tabla" id="tab:formas"><figcaption><strong>Tabla 1.</strong> Formas posibles de una historia en el espacio-tiempo.</figcaption><div class="desliza"><table><thead><tr><th>Forma</th><th>Qué pasa en el tiempo</th><th>Ejemplo</th></tr></thead><tbody><tr><td>Tubo</td><td>Un objeto persiste sin dividirse</td><td>Una piedra; un electrón libre</td></tr><tr><td>Tubo que termina</td><td>Un objeto se destruye</td><td>Una vela que se consume</td></tr><tr><td>Árbol</td><td>Un objeto se divide y las partes persisten</td><td>Un linaje celular</td></tr><tr><td>Árbol invertido</td><td>Varios objetos se fusionan en uno</td><td>Afluentes que forman un río</td></tr><tr><td>Red</td><td>Hay divisiones y fusiones</td><td>La genealogía humana; la evolución con transferencia horizontal de genes</td></tr><tr><td>Línea que vuelve</td><td>Una línea de mundo da la vuelta en el tiempo</td><td>El positrón de Feynman</td></tr></tbody></table></div></figure>
+<h3 id="leer-el-árbol-desde-el-corte">5.3. Leer el árbol desde el corte</h3>
+<p>En el modelo se ve el árbol entero. En la vida real solo se tiene el corte presente, y la forma del árbol se infiere: es el problema del coalescente de Kingman (<a href="#ref-kingman1982">1982</a>). McKenna et al. (<a href="#ref-mckenna2016">2016</a>) lo resolvieron con datos para un organismo entero: introdujeron en embriones de pez cebra un código de barras de ADN que CRISPR-Cas9 va mutando al azar durante el desarrollo, de modo que cada célula hereda las mutaciones de su madre y acumula nuevas; secuenciando los códigos del adulto reconstruyeron el árbol, y encontraron que la mayoría de las células de sus órganos derivan de relativamente pocos progenitores embrionarios.</p>
+<h3 id="una-dimensión-más">5.4. Una dimensión más</h3>
+<p>La idea original habla de un objeto en el espacio de tres dimensiones, cuya historia sería un árbol de cuatro que ya no se puede dibujar entero. Se pueden mostrar sus cortes animados, como hacen los microscopios de lámina de luz con los que Keller et al. (<a href="#ref-keller2008">2008</a>) filmaron el desarrollo temprano del pez cebra célula por célula, o su grafo de linaje como dendrograma. Las propiedades que ilustra el modelo no dependen de la dimensión: el corte muestra piezas separadas que comparten un pasado, la proyección pierde el orden temporal, un objeto que no se divide es un tubo y la diferencia entre tiempo y posibilidades es de interpretación, no de forma. Por eso la versión plana es la idea con una dimensión menos, no una idea distinta.</p>
+<h3 id="limitaciones">5.5. Limitaciones</h3>
+<ul><li>El modelo usa un plano más el tiempo, no el espacio más el tiempo.</li><li>Las piezas solo se dividen: no se fusionan ni mueren antes del final, así que no hay redes ni extinciones.</li><li>El tope de 48 piezas distorsiona la estadística de los árboles grandes; los resultados de crecimiento usan árboles sin tope.</li><li>La lectura de posibilidades es una imagen, no un modelo de la mecánica cuántica.</li><li>La cuarta dimensión espacial queda descrita, no modelada.</li></ul>
+<h2 id="sec:conclusiones">6. Conclusiones y trabajo futuro</h2>
+<p>La idea de que la historia completa de algo que se divide tiene forma de árbol es correcta, y gana precisión al separar sus tres lecturas. Si la dimensión extra es el tiempo, el árbol es un objeto real del espacio-tiempo, como el linaje de <em>C. elegans</em>, y cada instante es un corte en el que piezas que parecen independientes comparten un pasado. Si es el conjunto de las posibilidades, el árbol es el jardín de Borges y el tiempo ramificado de Prior, y se vive una sola rama. Si es una dimensión espacial, el árbol sería un objeto quieto cuyos cortes veríamos pasar. Las dos correcciones, tubo en lugar de árbol cuando no hay divisiones y corte en lugar de proyección, son las que convierten una imagen sugerente en un objeto con propiedades medibles: su número de piezas sigue las ecuaciones \eqref{eq:media} a \eqref{eq:W}, con una dispersión que ningún árbol individual deja ver.</p>
+<p>Quedan tres extensiones: llevar el modelo a tres dimensiones espaciales con cortes animados; permitir fusiones, para pasar de árboles a redes; y un modo inverso en el que se muestra solo el corte final, con un código de mutaciones heredadas, y hay que reconstruir el árbol, como en el trabajo de McKenna et al. (<a href="#ref-mckenna2016">2016</a>).</p>
+<h2 id="declaración-de-uso-de-ia">Declaración de uso de IA</h2>
+<p>Este trabajo se redactó con asistencia de Claude (Anthropic), un modelo de lenguaje, a partir de una guía previa del autor. El modelo propuso la estructura, la redacción, las derivaciones de la sección <a href="#sec:modelo">3</a> y el script que genera las figuras; el alcance y las decisiones son del autor, que es responsable del contenido. Las referencias se verificaron contra Crossref, Open Library, Project Gutenberg y las páginas citadas con <code>paper/verificar_bib.py</code>, y todas las cifras de la sección <a href="#sec:resultados">4</a> salen de <code>paper/figuras/generar.js</code>.</p>
+<h2 id="referencias">Referencias</h2><ol class="refs"><li id="ref-abbott1884">Abbott, E. A. (1884). <i>Flatland: A Romance of Many Dimensions</i>. Seeley &amp; Co.. <a href="https://www.gutenberg.org/ebooks/201">https://www.gutenberg.org/ebooks/201</a></li><li id="ref-belnap2001">Belnap, N., Perloff, M. y Xu, M. (2001). <i>Facing the Future: Agents and Choices in Our Indeterminist World</i>. Oxford University Press. <a href="https://openlibrary.org/works/OL29381068W">https://openlibrary.org/works/OL29381068W</a></li><li id="ref-borges1944">Borges, J. L. (1944). <i>Ficciones</i>. Sur. <a href="https://openlibrary.org/works/OL110971W">https://openlibrary.org/works/OL110971W</a></li><li id="ref-chang1999">Chang, J. T. (1999). Recent common ancestors of all present-day individuals. <i>Advances in Applied Probability</i>, <i>31</i>(4), 1002–1026. <a href="https://doi.org/10.1239/aap/1029955256">https://doi.org/10.1239/aap/1029955256</a></li><li id="ref-darwin1859">Darwin, C. (1859). <i>On the Origin of Species by Means of Natural Selection</i>. John Murray. <a href="https://www.gutenberg.org/ebooks/1228">https://www.gutenberg.org/ebooks/1228</a></li><li id="ref-dewitt1970">DeWitt, B. S. (1970). Quantum mechanics and reality. <i>Physics Today</i>, <i>23</i>(9), 30–35. <a href="https://doi.org/10.1063/1.3022331">https://doi.org/10.1063/1.3022331</a></li><li id="ref-doolittle1999">Doolittle, W. F. (1999). Phylogenetic classification and the universal tree. <i>Science</i>, <i>284</i>(5423), 2124–2128. <a href="https://doi.org/10.1126/science.284.5423.2124">https://doi.org/10.1126/science.284.5423.2124</a></li><li id="ref-everett1957">Everett, H. (1957). “Relative state” formulation of quantum mechanics. <i>Reviews of Modern Physics</i>, <i>29</i>(3), 454–462. <a href="https://doi.org/10.1103/RevModPhys.29.454">https://doi.org/10.1103/RevModPhys.29.454</a></li><li id="ref-feynman1949">Feynman, R. P. (1949). The theory of positrons. <i>Physical Review</i>, <i>76</i>(6), 749–759. <a href="https://doi.org/10.1103/PhysRev.76.749">https://doi.org/10.1103/PhysRev.76.749</a></li><li id="ref-harris1963">Harris, T. E. (1963). <i>The Theory of Branching Processes</i>. Springer. <a href="https://doi.org/10.1007/978-3-642-51866-9">https://doi.org/10.1007/978-3-642-51866-9</a></li><li id="ref-hawking1973">Hawking, S. W. y Ellis, G. F. R. (1973). <i>The Large Scale Structure of Space-Time</i>. Cambridge University Press. <a href="https://doi.org/10.1017/CBO9780511524646">https://doi.org/10.1017/CBO9780511524646</a></li><li id="ref-henderson1983">Henderson, L. D. (1983). <i>The Fourth Dimension and Non-Euclidean Geometry in Modern Art</i>. Princeton University Press. <a href="https://openlibrary.org/works/OL16688677W">https://openlibrary.org/works/OL16688677W</a></li><li id="ref-hinton1904">Hinton, C. H. (1904). <i>The Fourth Dimension</i>. Swan Sonnenschein. <a href="https://openlibrary.org/works/OL24454984W">https://openlibrary.org/works/OL24454984W</a></li><li id="ref-keller2008">Keller, P. J., Schmidt, A. D., Wittbrodt, J. y Stelzer, E. H. K. (2008). Reconstruction of zebrafish early embryonic development by scanned light sheet microscopy. <i>Science</i>, <i>322</i>(5904), 1065–1069. <a href="https://doi.org/10.1126/science.1162493">https://doi.org/10.1126/science.1162493</a></li><li id="ref-kingman1982">Kingman, J. F. C. (1982). The coalescent. <i>Stochastic Processes and their Applications</i>, <i>13</i>(3), 235–248. <a href="https://doi.org/10.1016/0304-4149(82)90011-4">https://doi.org/10.1016/0304-4149(82)90011-4</a></li><li id="ref-lewis1986">Lewis, D. (1986). <i>On the Plurality of Worlds</i>. Blackwell. <a href="https://openlibrary.org/works/OL8002120W">https://openlibrary.org/works/OL8002120W</a></li><li id="ref-mckenna2016">McKenna, A., Findlay, G. M., Gagnon, J. A., Horwitz, M. S., Schier, A. F. y Shendure, J. (2016). Whole-organism lineage tracing by combinatorial and cumulative genome editing. <i>Science</i>, <i>353</i>(6298), aaf7907. <a href="https://doi.org/10.1126/science.aaf7907">https://doi.org/10.1126/science.aaf7907</a></li><li id="ref-mctaggart1908">McTaggart, J. E. (1908). The unreality of time. <i>Mind</i>, <i>17</i>(68), 457–474. <a href="https://doi.org/10.1093/mind/XVII.4.457">https://doi.org/10.1093/mind/XVII.4.457</a></li><li id="ref-minkowski1909">Minkowski, H. (1909). Raum und Zeit. <i>Physikalische Zeitschrift</i>, <i>10</i>, 104–111. <a href="https://de.wikisource.org/wiki/Raum_und_Zeit_(Minkowski)">https://de.wikisource.org/wiki/Raum_und_Zeit_(Minkowski)</a></li><li id="ref-parfit1984">Parfit, D. (1984). <i>Reasons and Persons</i>. Oxford University Press. <a href="https://openlibrary.org/works/OL3153829W">https://openlibrary.org/works/OL3153829W</a></li><li id="ref-prior1967">Prior, A. N. (1967). <i>Past, Present and Future</i>. Clarendon Press. <a href="https://openlibrary.org/works/OL17981523W">https://openlibrary.org/works/OL17981523W</a></li><li id="ref-putnam1967">Putnam, H. (1967). Time and physical geometry. <i>The Journal of Philosophy</i>, <i>64</i>(8), 240–247. <a href="https://doi.org/10.2307/2024493">https://doi.org/10.2307/2024493</a></li><li id="ref-rietdijk1966">Rietdijk, C. W. (1966). A rigorous proof of determinism derived from the special theory of relativity. <i>Philosophy of Science</i>, <i>33</i>(4), 341–344. <a href="https://doi.org/10.1086/288106">https://doi.org/10.1086/288106</a></li><li id="ref-sider2001">Sider, T. (2001). <i>Four-Dimensionalism: An Ontology of Persistence and Time</i>. Oxford University Press. <a href="https://doi.org/10.1093/019924443X.001.0001">https://doi.org/10.1093/019924443X.001.0001</a></li><li id="ref-sulston1983">Sulston, J. E., Schierenberg, E., White, J. G. y Thomson, J. N. (1983). The embryonic cell lineage of the nematode Caenorhabditis elegans. <i>Developmental Biology</i>, <i>100</i>(1), 64–119. <a href="https://doi.org/10.1016/0012-1606(83)90201-4">https://doi.org/10.1016/0012-1606(83)90201-4</a></li><li id="ref-thomason1970">Thomason, R. H. (1970). Indeterminist time and truth-value gaps. <i>Theoria</i>, <i>36</i>(3), 264–281. <a href="https://doi.org/10.1111/j.1755-2567.1970.tb00427.x">https://doi.org/10.1111/j.1755-2567.1970.tb00427.x</a></li><li id="ref-wallace2012">Wallace, D. (2012). <i>The Emergent Multiverse: Quantum Theory According to the Everett Interpretation</i>. Oxford University Press. <a href="https://doi.org/10.1093/acprof:oso/9780199546961.001.0001">https://doi.org/10.1093/acprof:oso/9780199546961.001.0001</a></li><li id="ref-watson1875">Watson, H. W. y Galton, F. (1875). On the probability of the extinction of families. <i>The Journal of the Anthropological Institute of Great Britain and Ireland</i>, <i>4</i>, 138–144. <a href="https://doi.org/10.2307/2841222">https://doi.org/10.2307/2841222</a></li><li id="ref-weyl1949">Weyl, H. (1949). <i>Philosophy of Mathematics and Natural Science</i>. Princeton University Press. <a href="https://openlibrary.org/works/OL1136789W">https://openlibrary.org/works/OL1136789W</a></li><li id="ref-witten1981">Witten, T. A. y Sander, L. M. (1981). Diffusion-limited aggregation, a kinetic critical phenomenon. <i>Physical Review Letters</i>, <i>47</i>(19), 1400–1403. <a href="https://doi.org/10.1103/PhysRevLett.47.1400">https://doi.org/10.1103/PhysRevLett.47.1400</a></li><li id="ref-yule1925">Yule, G. U. (1925). A mathematical theory of evolution, based on the conclusions of Dr. J. C. Willis, F.R.S.. <i>Philosophical Transactions of the Royal Society of London. Series B</i>, <i>213</i>, 21–87. <a href="https://doi.org/10.1098/rstb.1925.0002">https://doi.org/10.1098/rstb.1925.0002</a></li><li id="ref-zurek2003">Zurek, W. H. (2003). Decoherence, einselection, and the quantum origins of the classical. <i>Reviews of Modern Physics</i>, <i>75</i>(3), 715–775. <a href="https://doi.org/10.1103/RevModPhys.75.715">https://doi.org/10.1103/RevModPhys.75.715</a></li></ol>
+<footer>
+<p>Texto, figuras y PDF bajo licencia <a href="https://creativecommons.org/licenses/by/4.0/deed.es">CC BY 4.0</a>: podés compartirlo y adaptarlo citando al autor. El código que genera las figuras está bajo licencia MIT. Esta página se genera a partir de <code>paper/paper.tex</code>.</p>
+</footer>
+</main>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="13">
+<rect width="640" height="400" fill="#ffffff"/>
+<line x1="70" y1="40" x2="70" y2="344" stroke="#e3e1db"/>
+<text x="70" y="362" text-anchor="middle" fill="#333">0</text>
+<line x1="208" y1="40" x2="208" y2="344" stroke="#e3e1db"/>
+<text x="208" y="362" text-anchor="middle" fill="#333">1</text>
+<line x1="346" y1="40" x2="346" y2="344" stroke="#e3e1db"/>
+<text x="346" y="362" text-anchor="middle" fill="#333">2</text>
+<line x1="484" y1="40" x2="484" y2="344" stroke="#e3e1db"/>
+<text x="484" y="362" text-anchor="middle" fill="#333">3</text>
+<line x1="622" y1="40" x2="622" y2="344" stroke="#e3e1db"/>
+<text x="622" y="362" text-anchor="middle" fill="#333">4</text>
+<line x1="70" y1="344" x2="622" y2="344" stroke="#e3e1db"/>
+<text x="62" y="348" text-anchor="end" fill="#333">0</text>
+<line x1="70" y1="280.6666666666667" x2="622" y2="280.6666666666667" stroke="#e3e1db"/>
+<text x="62" y="284.6666666666667" text-anchor="end" fill="#333">0,25</text>
+<line x1="70" y1="217.33333333333331" x2="622" y2="217.33333333333331" stroke="#e3e1db"/>
+<text x="62" y="221.33333333333331" text-anchor="end" fill="#333">0,5</text>
+<line x1="70" y1="154" x2="622" y2="154" stroke="#e3e1db"/>
+<text x="62" y="158" text-anchor="end" fill="#333">0,75</text>
+<line x1="70" y1="90.66666666666666" x2="622" y2="90.66666666666666" stroke="#e3e1db"/>
+<text x="62" y="94.66666666666666" text-anchor="end" fill="#333">1</text>
+<rect x="70" y="40" width="552" height="304" fill="none" stroke="#333"/>
+<text x="346" y="386" text-anchor="middle" fill="#111">W = N(59) / (1 + p)<tspan baseline-shift="super" font-size="70%">59</tspan></text>
+<text transform="translate(18 192) rotate(-90)" text-anchor="middle" fill="#111">Densidad de probabilidad</text>
+<clipPath id="area"><rect x="70" y="40" width="552" height="304"/></clipPath><g clip-path="url(#area)">
+<line x1="136.51571975000292" y1="40" x2="136.51571975000292" y2="344" stroke="#666" stroke-dasharray="4 4"/>
+<text x="141.51571975000292" y="56" fill="#444" font-size="12">ejemplo (15 ramas)</text>
+<path d="M83.80 146.65 L111.40 161.60 L139.00 188.45 L166.60 212.52 L194.20 216.57 L221.80 263.95 L249.40 274.84 L277.00 281.93 L304.60 287.76 L332.20 303.97 L359.80 312.59 L387.40 319.17 L415.00 323.73 L442.60 322.21 L470.20 330.83 L497.80 333.61 L525.40 334.88 L553.00 335.89 L580.60 339.44 L608.20 338.17" fill="none" stroke="#2a55c9" stroke-width="2.2" stroke-linejoin="round"/>
+<path d="M70.00 90.67 L76.90 103.02 L83.80 114.77 L90.70 125.95 L97.60 136.59 L104.50 146.70 L111.40 156.33 L118.30 165.48 L125.20 174.19 L132.10 182.47 L139.00 190.35 L145.90 197.84 L152.80 204.97 L159.70 211.75 L166.60 218.20 L173.50 224.33 L180.40 230.17 L187.30 235.72 L194.20 241.00 L201.10 246.03 L208.00 250.80 L214.90 255.35 L221.80 259.67 L228.70 263.79 L235.60 267.70 L242.50 271.42 L249.40 274.96 L256.30 278.33 L263.20 281.53 L270.10 284.58 L277.00 287.47 L283.90 290.23 L290.80 292.85 L297.70 295.35 L304.60 297.72 L311.50 299.98 L318.40 302.12 L325.30 304.17 L332.20 306.11 L339.10 307.96 L346.00 309.72 L352.90 311.39 L359.80 312.98 L366.70 314.49 L373.60 315.93 L380.50 317.30 L387.40 318.60 L394.30 319.84 L401.20 321.02 L408.10 322.14 L415.00 323.21 L421.90 324.22 L428.80 325.18 L435.70 326.10 L442.60 326.97 L449.50 327.80 L456.40 328.59 L463.30 329.35 L470.20 330.06 L477.10 330.74 L484.00 331.39 L490.90 332.00 L497.80 332.59 L504.70 333.14 L511.60 333.67 L518.50 334.18 L525.40 334.66 L532.30 335.11 L539.20 335.55 L546.10 335.96 L553.00 336.35 L559.90 336.72 L566.80 337.08 L573.70 337.42 L580.60 337.74 L587.50 338.04 L594.40 338.33 L601.30 338.61 L608.20 338.87 L615.10 339.12 L622.00 339.36" fill="none" stroke="#c25a00" stroke-width="2.2" stroke-dasharray="7 5" stroke-linejoin="round"/>
+</g>
+<line x1="70" y1="24" x2="92" y2="24" stroke="#2a55c9" stroke-width="3"/>
+<text x="98" y="28" fill="#111">5000 árboles (densidad)</text>
+<line x1="275.6" y1="24" x2="297.6" y2="24" stroke="#c25a00" stroke-width="3" stroke-dasharray="6 4"/>
+<text x="303.6" y="28" fill="#111">e<tspan baseline-shift="super" font-size="70%">−w</tspan></text>
+</svg>
